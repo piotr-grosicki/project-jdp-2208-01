@@ -1,3 +1,4 @@
+
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.dto.ProductDto;
@@ -22,7 +23,7 @@ public class ProductController {
 
     @PostMapping
     public ProductDto createProduct(@RequestBody ProductDto productDto) {
-       return new ProductDto();
+        return new ProductDto();
     }
 
     @PutMapping
