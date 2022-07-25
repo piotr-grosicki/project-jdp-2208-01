@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/v1/product")
 public class ProductController {
 
-    @GetMapping(value = "list")
+    @GetMapping
     public List<ProductDto> getAllProducts() {
         return new ArrayList<>();
     }
