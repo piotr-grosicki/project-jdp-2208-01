@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 package com.kodilla.ecommercee.controller;
 
@@ -8,10 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/v1/product")
 public class ProductController {
-
     @GetMapping
     public List<ProductDto> getAllProducts() {
         return new ArrayList<>();
@@ -36,9 +35,4 @@ public class ProductController {
     public void deleteProduct(@PathVariable Long id) {
 
     }
-=======
-package com.kodilla.ecommercee.controller;
-
-public class ProductController {
->>>>>>> c8a82d5bc3e4d88b313d92ad380ae5790826b32b
 }
