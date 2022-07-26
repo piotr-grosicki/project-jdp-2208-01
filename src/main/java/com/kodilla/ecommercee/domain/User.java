@@ -16,5 +16,4 @@ public class User {
     @GeneratedValue
     @Column(name = "user_id", unique = true)
     private Long id;
-
 }
