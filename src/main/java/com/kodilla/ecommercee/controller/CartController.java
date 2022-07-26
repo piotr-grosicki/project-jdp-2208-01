@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.dto.CartDto;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class CartController {
         return new CartDto(1L);
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "{cartId}")
     public void deleteCart(@PathVariable Long cartId) {
         System.out.println("Delete test");
     }
