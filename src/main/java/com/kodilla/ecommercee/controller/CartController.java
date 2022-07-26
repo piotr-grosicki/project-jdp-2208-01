@@ -26,7 +26,7 @@ public class CartController {
     }
 
     @DeleteMapping
-    public void deleteCart(@PathVariable Long taskId) {
+    public void deleteCart(@PathVariable Long cartId) {
         System.out.println("Delete test");
     }
 
