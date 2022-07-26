@@ -2,10 +2,13 @@ package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -19,12 +22,12 @@ public class Order {
     @Column(name = "order_id", unique = true)
     private Long id;
 
-    @ManyToOne()
-    @JoinColumns({
-            @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
-            @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
-    })
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
+
+    @Column(name = "cart_id")
+    private Long cartId;
 
     @Column(name = "date")
     private LocalDateTime orderDate;
@@ -32,6 +35,6 @@ public class Order {
     @Column(name = "execution")
     private String execution;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
-    private List<Product> products;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
+    private List<Product> products = new ArrayList<>();
 }

@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "users")
-public class User {
+@AllArgsConstructor
+@Entity(name = "carts")
+public class Cart {
 
     @Id
     @NotNull
     @GeneratedValue
-    @Column(name = "user_id", unique = true)
+    @Column(name = "cart_id")
     private Long id;
 
 }
