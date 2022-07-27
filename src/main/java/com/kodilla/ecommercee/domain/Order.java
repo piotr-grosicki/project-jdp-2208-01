@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,4 +24,16 @@ public class Order {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    @Column(name = "date")
+    private LocalDateTime orderDate;
+
+    @Column(name = "execution")
+    private String execution;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
+    private List<Product> products = new ArrayList<>();
 }
