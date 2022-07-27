@@ -16,12 +16,12 @@ public class GroupController {
 
     @PostMapping
     public GroupDto createGroup(@RequestBody GroupDto groupDto) {
-        return new GroupDto();
+        return new GroupDto(1L, "ubrania");
     }
 
     @GetMapping(value = "{id}")
     public GroupDto getById(@PathVariable Long id) {
-        return new GroupDto();
+        return new GroupDto(1L,"ubrania");
     }
 
     @PutMapping
