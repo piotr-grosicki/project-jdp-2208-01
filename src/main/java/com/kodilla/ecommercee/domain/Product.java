@@ -30,4 +30,9 @@ public class Product {
     )
     private List<Order> orders = new ArrayList<>();
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
+    private Group group;
+
 }
+
