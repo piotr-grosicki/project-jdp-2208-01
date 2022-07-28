@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,10 +22,6 @@ public class Product {
     @Column(name = "product_id", unique = true)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    private Group group;
-
     @Column(name = "name")
     private String name;
 
@@ -36,7 +31,7 @@ public class Product {
     @Column(name = "availability")
     private boolean availability;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "products_orders",
             joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
@@ -44,8 +39,12 @@ public class Product {
     )
     private List<Order> orders = new ArrayList<>();
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
+    private Group group;
+
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
 
-
 }
+

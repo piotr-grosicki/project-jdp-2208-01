@@ -19,7 +19,7 @@ public class Cart {
     @Column(name = "cart_id", unique = true)
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "carts_products",
             joinColumns = {@JoinColumn(name = "cart_id", referencedColumnName = "cart_id")},
