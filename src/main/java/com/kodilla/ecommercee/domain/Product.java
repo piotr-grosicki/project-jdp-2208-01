@@ -34,4 +34,10 @@ public class Product {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
+    private Group group;
+
+
 }
+
