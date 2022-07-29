@@ -12,13 +12,13 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "groups")
+@Entity(name = "groups_table")
 public class Group {
 
     @Id
     @NotNull
     @GeneratedValue
-    @Column(name = "group_id", unique = true)
+    @Column(name = "groups_id", unique = true)
     private Long id;
 
     @Column(name = "name")
