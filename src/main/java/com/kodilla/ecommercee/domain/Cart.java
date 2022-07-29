@@ -16,7 +16,15 @@ public class Cart {
     @Id
     @NotNull
     @GeneratedValue
-    @Column(name = "cart_id")
+    @Column(name = "cart_id", unique = true)
     private Long id;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "carts_products",
+            joinColumns = {@JoinColumn(name = "cart_id", referencedColumnName = "cart_id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "product_id")}
+    )
+    private List<Product> products = new ArrayList<>();
 
 }

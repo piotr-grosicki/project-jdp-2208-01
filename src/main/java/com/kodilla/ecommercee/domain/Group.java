@@ -9,11 +9,10 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "group_table")
+@Entity(name = "groups")
 public class Group {
 
     @Id
@@ -32,5 +31,4 @@ public class Group {
             fetch = FetchType.EAGER
     )
     private final List<Product> products = new ArrayList<>();
-
 }
