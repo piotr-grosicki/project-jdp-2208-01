@@ -2,19 +2,18 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.dto.UserDto;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-@Controller
+@RestController
 @CrossOrigin("*")
 @RequestMapping("/v1/users")
 public class UserController {
     @GetMapping()
     public List<UserDto> getUsers() {
-        return new ArrayList<>();
+        return Arrays.asList(new UserDto(1L, "John", "Louis"), new UserDto(2L, "Patrick", "David"));
     }
     @GetMapping(value = "{userId}")
     public UserDto getUser(@PathVariable Long userId) {
