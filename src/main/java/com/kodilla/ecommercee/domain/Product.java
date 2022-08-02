@@ -14,12 +14,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "products")
 public class Product {
 
     @Id
-    @NotNull
     @GeneratedValue
     @Column(name = "product_id", unique = true)
     private Long id;
@@ -42,11 +40,17 @@ public class Product {
     private List<Order> orders = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
+    @JoinColumn(name = "group_id", referencedColumnName = "groups_id")
     private Group group;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private List<Cart> carts = new ArrayList<>();
 
+    public Product(String name, BigDecimal price, boolean availability, Group group) {
+        this.name = name;
+        this.price = price;
+        this.availability = availability;
+        this.group = group;
+    }
 }
 
