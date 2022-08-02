@@ -1,21 +1,19 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "orders")
 public class Order {
 
     @Id
-    @NotNull
     @GeneratedValue
     @Column(name = "order_id", unique = true)
     private Long id;
@@ -36,4 +34,12 @@ public class Order {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
     private List<Product> products = new ArrayList<>();
+
+    public Order(User user, Cart cart, LocalDateTime orderDate, String execution, List<Product> products) {
+        this.user = user;
+        this.cart = cart;
+        this.orderDate = orderDate;
+        this.execution = execution;
+        this.products = products;
+    }
 }
