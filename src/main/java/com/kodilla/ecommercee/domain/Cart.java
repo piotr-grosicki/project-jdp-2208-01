@@ -1,11 +1,10 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.*;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,4 +24,7 @@ public class Cart {
     )
     private List<Product> products = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
 }
