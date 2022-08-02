@@ -40,7 +40,7 @@ public class Product {
     private List<Order> orders = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
+    @JoinColumn(name = "group_id", referencedColumnName = "groups_id")
     private Group group;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
