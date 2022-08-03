@@ -1,14 +1,13 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "users")
 public class User {
 
@@ -37,4 +36,9 @@ public class User {
             fetch = FetchType.EAGER
     )
     private final List<Order> orders = new ArrayList<>();
+
+    public User(String username, Boolean content) {
+        this.username = username;
+        this.content = content;
+    }
 }
