@@ -17,12 +17,12 @@ public class ProductController {
 
     @GetMapping(value = "{id}")
     public ProductDto getOneProducts(@PathVariable Long id) {
-        return new ProductDto();
+        return new ProductDto(1L, "name","range",20L,1L);
     }
 
     @PostMapping
     public ProductDto createProduct(@RequestBody ProductDto productDto) {
-       return new ProductDto();
+       return new ProductDto(1L, "name","range",20L,1L);
     }
 
     @PutMapping
