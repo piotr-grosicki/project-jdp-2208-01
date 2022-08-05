@@ -35,7 +35,6 @@ public class UserTestSuite {
 
     @Before
     public void prepareDate() {
-        // user.setId(1L);
         user.setUsername("user1");
         user.setUserKey(1L);
         user.setContent(true);
