@@ -14,15 +14,10 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User, Long> {
 
     @Override
-    Optional<User> findById(Long id);
-    @Override
     List<User> findAll();
-    @Override
-    void deleteById(Long id);
 
     Optional<User> findByUsername(String username);
     Optional<User> findByUserKey(Long userKey);
     Optional<User> findByContent(Boolean content);
-
 
 }
