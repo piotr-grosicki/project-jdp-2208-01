@@ -13,7 +13,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DbOrderService {
 
-    @Autowired
     private final OrderRepository orderRepository;
 
     public Optional<Order> findOrderById(Long id) {
