@@ -109,8 +109,8 @@ public class CartRepositoryTestSuite {
         Product productFour = new Product("timberland seoul city sneaker", new BigDecimal(750), false, group);
         Product productFive = new Product("timberland dausette oxford", new BigDecimal(750), true, group);
 
-        User userOne = new User("marcin_kowalski2", true);
-        User userTwo = new User("marcin_nowak", true);
+        User userOne = new User("marcin_kowalski2", true, 12345L);
+        User userTwo = new User("marcin_nowak", true, 12346L);
 
         Cart cartOne = new Cart();
         Cart cartTwo = new Cart();
