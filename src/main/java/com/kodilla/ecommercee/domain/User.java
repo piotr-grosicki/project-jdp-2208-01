@@ -37,8 +37,9 @@ public class User {
     )
     private final List<Order> orders = new ArrayList<>();
 
-    public User(String username, Boolean content) {
+    public User(String username, Boolean content, Long userKey) {
         this.username = username;
         this.content = content;
+        this.userKey = userKey;
     }
 }
