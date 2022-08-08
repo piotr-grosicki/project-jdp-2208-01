@@ -78,7 +78,7 @@ public class UserTestSuite {
     }
 
     @Test
-    public void checkIfCartIsSavedTest() {
+    public void testUserCartRelation() {
         //Given
         //When
         userRepository.save(user);
