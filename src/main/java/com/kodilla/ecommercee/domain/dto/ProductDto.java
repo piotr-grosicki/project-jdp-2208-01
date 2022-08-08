@@ -2,9 +2,11 @@ package com.kodilla.ecommercee.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProductDto {
 
     private Long id;
@@ -12,5 +14,6 @@ public class ProductDto {
     private String description;
     private Long price;
     private Long groupId;
+
 
 }
