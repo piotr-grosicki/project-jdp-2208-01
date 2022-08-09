@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.ProductDbService;
@@ -18,7 +19,7 @@ public class ProductController {
     private ProductMapper productMapper;
     @GetMapping
     public List<ProductDto> getAllProducts() {
-        return new ArrayList<>();
+        return productMapper.mapToProductDtoList(productDbService.getAllProducts());
     }
 
     @GetMapping(value = "{id}")
@@ -27,17 +28,17 @@ public class ProductController {
     }
 
     @PostMapping
-    public void createProduct(@RequestBody ProductDto productDto) {
-       productDbService.saveProduct(productMapper.mapToProduct(productDto));
+    public Product createProduct(@RequestBody ProductDto productDto) {
+       return productDbService.saveProduct(productMapper.mapToProduct(productDto));
     }
 
     @PutMapping
-    public void updateProduct(@RequestBody ProductDto productDto) {
-
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        return productMapper.mapToProductDto(productDbService.saveProduct(productMapper.mapToProduct(productDto)));
     }
 
     @DeleteMapping(value = "{id}")
     public void deleteProduct(@PathVariable Long id) {
-
+        productDbService.deleteProduct(id);
     }
 }
