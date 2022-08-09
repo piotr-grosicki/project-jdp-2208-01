@@ -20,7 +20,7 @@ public class User {
     private String username;
 
     @Column(name = "status")
-    private Boolean content;
+    private Boolean status;
 
     @Column(name = "userkey")
     private Long userKey;
@@ -37,9 +37,9 @@ public class User {
     )
     private final List<Order> orders = new ArrayList<>();
 
-    public User(String username, Boolean content, Long userKey) {
+    public User(String username, Boolean status, Long userKey) {
         this.username = username;
-        this.content = content;
+        this.status = status;
         this.userKey = userKey;
     }
 }

@@ -8,7 +8,7 @@ import lombok.Getter;
 public class UserDto {
 
     private Long userId;
-    private String firstName;
+    private String username;
     private Boolean status;
     private Long userKey;
 
