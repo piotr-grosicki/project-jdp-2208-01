@@ -5,6 +5,8 @@ import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.service.DbOrderService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 
@@ -12,42 +14,41 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/orders")
+@RequiredArgsConstructor
 public class OrderController {
 
     private final DbOrderService orderService;
     private final OrderMapper orderMapper;
-    public OrderController(DbOrderService orderService, OrderMapper orderMapper) {
-        this.orderService = orderService;
-        this.orderMapper = orderMapper;
-    }
 
     @GetMapping
-    public List<OrderDto> getOrders() {
+    public ResponseEntity<List<OrderDto>> getOrders() {
         List<Order> orders = orderService.findAllOrders();
-        return orderMapper.mapToOrderDtoList(orders);
+        return ResponseEntity.ok(orderMapper.mapToOrderDtoList(orders));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Order createOrder(@RequestBody OrderDto orderDto) {
+    public ResponseEntity<Order> createOrder(@RequestBody OrderDto orderDto) {
         Order order = orderMapper.mapToOrder(orderDto);
-        return orderService.saveOrder(order);
+        orderService.saveOrder(order);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
-    public OrderDto getOrder(@PathVariable Long id) throws OrderNotFoundException {
-        return orderMapper.mapToOrderDto(orderService.findOrderById(id).
-                orElseThrow(OrderNotFoundException::new));
+    public ResponseEntity<OrderDto> getOrder(@PathVariable Long id) throws OrderNotFoundException {
+            return ResponseEntity.ok(orderMapper.mapToOrderDto(orderService.findOrderById(id)));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
+    public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) throws OrderNotFoundException {
         Order order = orderMapper.mapToOrder(orderDto);
-        Order savedOrder = orderService.saveOrder(order);
-        return orderMapper.mapToOrderDto(savedOrder);
+        Order updateOrder = orderService.updateOrder(order);
+        orderMapper.mapToOrderDto(updateOrder);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping(value = "{id}")
-    public void deleteOrder(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long id) throws OrderNotFoundException {
         orderService.deleteOrder(id);
+        return ResponseEntity.ok().build();
     }
 }
