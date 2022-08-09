@@ -27,7 +27,7 @@ public class OrderMapper {
         );
     }
 
-    public List<OrderDto> mapToOrderDtoList(List<Order> orderList) {
+    public List<OrderDto> mapToOrderDtoList(final List<Order> orderList) {
         return orderList.stream()
                 .map(this::mapToOrderDto)
                 .collect(Collectors.toList());

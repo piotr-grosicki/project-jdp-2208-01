@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(OrderNotFoundException.class)
-    public ResponseEntity<Object> handleTaskNotFoundException(OrderNotFoundException orderNotFoundException) {
+    public ResponseEntity<Object> handleOrderNotFoundException(OrderNotFoundException orderNotFoundException) {
         return new ResponseEntity<>("Order with given Id doesn't exist", HttpStatus.BAD_REQUEST);
 
     }
