@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.service;
 
-import com.kodilla.ecommercee.controller.ProductNotFoundException;
+import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductDbService {
+public class DbProductService {
 
     private ProductRepository productRepository;
 
