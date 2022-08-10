@@ -9,6 +9,8 @@ import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,7 +30,7 @@ public class ProductMapper {
                 productDto.isAvailable(),
                 groupRepository.findById(productDto.getGroupId())
                         .orElseThrow(() -> new RuntimeException("Group id '" + productDto.getGroupId() +
-                                "' doens't exist"))
+                                "' doesn't exist"))
         );
     }
 
@@ -39,17 +41,17 @@ public class ProductMapper {
                 product.isAvailability(),
                 product.getPrice(),
                 product.getGroup().getId(),
-                product.getOrders().stream()
+                product.getOrders().isEmpty()? Collections.emptyList() : product.getOrders().stream()
                         .map(Order::getId)
                         .collect(Collectors.toList()),
-                product.getCarts().stream()
+                product.getCarts().isEmpty()? Collections.emptyList() : product.getCarts().stream()
                         .map(Cart::getId)
                         .collect(Collectors.toList())
         );
     }
 
     public List<ProductDto> mapToProductDtoList(final List<Product> productList) {
-        return productList.stream()
+        return productList.isEmpty()? Collections.emptyList() : productList.stream()
                 .map(this::mapToProductDto)
                 .collect(Collectors.toList());
     }
