@@ -19,7 +19,6 @@ while [ -h "$PRG" ] ; do
         PRG=`dirname "$PRG"`"/$link"
     fi
 done
-
 SAVED="`pwd`"
 cd "`dirname \"$PRG\"`/" >/dev/null
 APP_HOME="`pwd -P`"
@@ -67,7 +66,6 @@ esac
 
 CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 
-
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
@@ -104,6 +102,7 @@ if [ "$cygwin" = "false" -a "$darwin" = "false" -a "$nonstop" = "false" ] ; then
     else
         warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
     fi
+fi
 
 # For Darwin, add options to specify how the application appears in the dock
 if $darwin; then
@@ -130,7 +129,7 @@ if $cygwin ; then
     fi
 
     # Now convert the arguments - kludge to limit ourselves to /bin/sh
- i=0
+    i=0
     for arg in "$@" ; do
         CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
         CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
@@ -140,7 +139,7 @@ if $cygwin ; then
         else
             eval `echo args$i`="\"$arg\""
         fi
-         i=$((i+1))
+        i=$((i+1))
     done
     case $i in
         (0) set -- ;;
