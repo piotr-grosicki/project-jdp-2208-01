@@ -7,9 +7,11 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "orders")
 public class Order {
 
@@ -41,5 +43,10 @@ public class Order {
         this.orderDate = orderDate;
         this.execution = execution;
         this.products = products;
+    }
+    public Order(Long id, LocalDateTime orderDate, String execution) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.execution = execution;
     }
 }
