@@ -1,37 +1,43 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.mapper.ProductMapper;
+import com.kodilla.ecommercee.service.DbProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/product")
+@RequiredArgsConstructor
 public class ProductController {
 
+    private DbProductService dbProductService;
+    private ProductMapper productMapper;
     @GetMapping
     public List<ProductDto> getAllProducts() {
-        return new ArrayList<>();
+        return productMapper.mapToProductDtoList(dbProductService.getAllProducts());
     }
 
     @GetMapping(value = "{id}")
     public ProductDto getOneProducts(@PathVariable Long id) {
-        return new ProductDto(1L, "name","range",20L,1L);
+        return productMapper.mapToProductDto(dbProductService.getProduct(id));
     }
 
     @PostMapping
-    public ProductDto createProduct(@RequestBody ProductDto productDto) {
-       return new ProductDto(1L, "name","range",20L,1L);
+    public Product createProduct(@RequestBody ProductDto productDto) {
+       return dbProductService.saveProduct(productMapper.mapToProduct(productDto));
     }
 
     @PutMapping
-    public void updateProduct(@RequestBody ProductDto productDto) {
-
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        return productMapper.mapToProductDto(dbProductService.saveProduct(productMapper.mapToProduct(productDto)));
     }
 
     @DeleteMapping(value = "{id}")
     public void deleteProduct(@PathVariable Long id) {
-
+        dbProductService.deleteProduct(id);
     }
 }
