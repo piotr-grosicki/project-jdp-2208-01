@@ -51,4 +51,8 @@ public class User {
     )
     private final List<Order> orders = new ArrayList<>();
 
+    public User(@NonNull String username, @NonNull Boolean content) {
+        this.username = username;
+        this.content = content;
+    }
 }
