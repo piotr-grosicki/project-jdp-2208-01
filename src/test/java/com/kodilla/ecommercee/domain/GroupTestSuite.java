@@ -54,5 +54,27 @@ public class GroupTestSuite {
         Assert.assertEquals("new name", fetchedGroup.get().getName());
     }
 
+@Test
+    public void testRelationsWithProducts() {
+        //Given
+        Group group = new Group("name of group");
+        Product product1 = new Product("product1", new BigDecimal(100.20), true, group);
+        Product product2 = new Product("product2", new BigDecimal(40.00), true, group);
+        List<Product> products = Arrays.asList(product1, product2);
 
+        //When
+        group.getProducts().add(product1);
+        group.getProducts().add(product2);
+        List<Product> productsFromGroup = group.getProducts();
+
+        groupRepository.save(group);
+        productRepository.save(product1);
+        productRepository.save(product2);
+
+        //Then
+        Assert.assertEquals(2, productsFromGroup.size());
+        Assert.assertEquals(2, products.size());
+        Assert.assertEquals(products, productsFromGroup);
+
+    }
 }
