@@ -10,11 +10,11 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "groups_table")
 public class Group {
 
     @Id
-    @NotNull
     @GeneratedValue
     @Column(name = "groups_id", unique = true)
     private Long id;
@@ -28,9 +28,12 @@ public class Group {
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
-    private final List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     public Group(String name) {
         this.name = name;
     }
+
+
+
 }

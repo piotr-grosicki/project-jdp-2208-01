@@ -13,7 +13,7 @@ import java.util.Optional;
 @Transactional
 public interface GroupRepository extends CrudRepository<Group, Long> {
 
-   @Override
+    @Override
     List<Group> findAll();
 
     @Override
