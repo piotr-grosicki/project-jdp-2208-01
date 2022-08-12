@@ -5,7 +5,7 @@ import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.service.DbGroupService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,34 +14,35 @@ import java.util.List;
 @RequestMapping("/v1/group")
 public class GroupController {
 
-    @Autowired
+
     private final GroupMapper groupMapper;
 
-    @Autowired
     private final DbGroupService dbGroupService;
 
     @GetMapping
-    public List<GroupDto> getAllGroups() {
-        return groupMapper.mapToGroupDtoList(dbGroupService.getGroups());
+    public ResponseEntity<List<GroupDto>> getAllGroups() {
+        return ResponseEntity.ok(groupMapper.mapToGroupDtoList(dbGroupService.getGroups()));
     }
 
     @PostMapping
-    public void createGroup(@RequestBody GroupDto groupDto) {
+    public ResponseEntity<Void> createGroup(@RequestBody GroupDto groupDto) {
         dbGroupService.saveGroup(groupMapper.mapToGroup(groupDto));
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "{id}")
-    public GroupDto getById(@PathVariable Long id) throws GroupNotFoundException {
-        return groupMapper.mapToGroupDto(dbGroupService.getGroup(id));
+    public ResponseEntity<GroupDto> getById(@PathVariable Long id) throws GroupNotFoundException {
+        return ResponseEntity.ok(groupMapper.mapToGroupDto(dbGroupService.getGroup(id)));
     }
 
     @PutMapping
-    public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
-        return groupMapper.mapToGroupDto(dbGroupService.saveGroup(groupMapper.mapToGroup(groupDto)));
+    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) {
+        return ResponseEntity.ok(groupMapper.mapToGroupDto(dbGroupService.saveGroup(groupMapper.mapToGroup(groupDto))));
     }
 
     @DeleteMapping(value = "{id}")
-    public void deleteGroup(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteGroup(@PathVariable Long id) {
         dbGroupService.deleteGroup(id);
+        return ResponseEntity.ok().build();
     }
 }

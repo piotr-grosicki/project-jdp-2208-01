@@ -3,15 +3,13 @@ package com.kodilla.ecommercee.domain.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
 public class OrderDto {
 
     private Long id;
-    private LocalDate dateOrder;
-    private String ExecutionOrder;
-
+    private LocalDateTime orderDate;
+    private String execution;
 }

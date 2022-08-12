@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.mapper;
 import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.dto.GroupDto;
 import com.kodilla.ecommercee.repository.ProductRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +13,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class GroupMapper {
-    @Autowired
+
     ProductRepository productRepository;
 
     public Group mapToGroup(GroupDto groupDto) {
