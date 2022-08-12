@@ -18,6 +18,7 @@ import java.util.function.Supplier;
 public class DbUserServices {
 
     private final UserRepository userRepository;
+    private final DbUserKeyService userKeyService;
 
     public void createUser(final User user) {
         userRepository.save(user);
@@ -27,59 +28,23 @@ public class DbUserServices {
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
-    public void blockUser(UserData userData, Long userId) throws UserNotFoundException {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        generateUserKey(userId, user.getPassword());
-        userKeyValidator(user);
-        if (user.getPassword().equals(userData.getPassword())) {
-            user.setContent(false);
-        } else {
-            System.out.println("User is already blocked");
-        }
-    }
-
-    public void unlockUser(UserData userData, Long userId) throws UserNotFoundException {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        generateUserKey(userId, user.getPassword());
-        userKeyValidator(user);
-        if (user.getPassword().equals(userData.getPassword())) {
-            if (!user.getContent()) {
-                user.setContent(true);
-            } else {
-                System.out.println("User is already unlocked");
-            }
-        } else {
-            System.out.println("Wrong password");
-        }
-    }
-
-    public void generateUserKey(final Long id, String password) throws UserNotFoundException {
+    public void updateUserKey(final Long id, String generatedKey) throws UserNotFoundException {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        long leftLimit = 1L;
-        long rightLimit = 10L;
-        if (user.getPassword().equals(password)) {
-            if (user.getContent()) {
-                Long generatedKey = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
-                user.setUserKey(generatedKey);
-                user.setKeyStartTime(LocalDateTime.now());
-                userRepository.save(user);
-            } else {
-                System.out.println("User is blocked");
-            }
-        } else {
-            System.out.println("Incorrect credentials");
-        }
+        user.setUserKey(generatedKey);
+        user.setKeyStartTime(LocalDateTime.now());
+        createUser(user);
     }
 
-    public void userKeyValidator(User user) {
-        if (user.getUserKey() != null){
-            LocalDateTime currentTime = LocalDateTime.now();
-            LocalDateTime creationTime = user.getKeyStartTime();
-            if(ChronoUnit.HOURS.between(creationTime, currentTime) >= 1 || !user.getContent()) {
-                user.setUserKey(null);
-                user.setKeyStartTime(null);
-                userRepository.save(user);
-            }
+    public void blockUser(final Long id, String key) throws UserNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        Boolean isKeyValid = userKeyService.userKeyValidator(id);
+        if (isKeyValid || user.getUserKey().equals(key)){
+            user.setContent(false);
+            createUser(user);
+        } else {
+            user.setUserKey(null);
+            System.out.println("User key is no longer valid, create new key");
+            createUser(user);
         }
     }
 }

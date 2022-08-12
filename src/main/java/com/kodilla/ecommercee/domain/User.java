@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "users")
@@ -34,7 +35,7 @@ public class User {
     private Boolean content;
 
     @Column(name = "userkey")
-    private Long userKey;
+    private String userKey;
 
     @Column(name = "KeyStartTime")
     private LocalDateTime keyStartTime;

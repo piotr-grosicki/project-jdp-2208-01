@@ -36,7 +36,7 @@ public class UserTestSuite {
     @Before
     public void prepareDate() {
         user.setUsername("user1");
-        user.setUserKey(1L);
+        user.setUserKey("key");
         user.setContent(true);
         user.setCart(cart);
         cart.setUser(user);
@@ -52,7 +52,6 @@ public class UserTestSuite {
 
         assertTrue(userRepository.findById(user.getId()).isPresent());
         assertTrue(userRepository.findByUsername(user.getUsername()).isPresent());
-        assertTrue(userRepository.findByUserKey(user.getUserKey()).isPresent());
         assertTrue(userRepository.findByContent(user.getContent()).isPresent());
 
         //CleanUp
@@ -65,7 +64,7 @@ public class UserTestSuite {
         User secondUser = new User();
 
         secondUser.setUsername("user2");
-        secondUser.setUserKey(2L);
+        secondUser.setUserKey("test");
         secondUser.setContent(true);
         //When
         userRepository.save(user);
