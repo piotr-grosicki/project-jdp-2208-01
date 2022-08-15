@@ -103,7 +103,6 @@ public class UserTestSuite {
         //Then
         Assertions.assertFalse(orderRepository.findById(order.getId()).isPresent());
     }
-
 }
 
 

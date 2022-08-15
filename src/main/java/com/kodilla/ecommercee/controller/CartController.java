@@ -5,12 +5,10 @@ import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.exceptions.CartNotFoundException;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.service.DbCartService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/v1/carts")
@@ -32,7 +30,7 @@ public class CartController {
     }
 
     @PutMapping
-    public ResponseEntity<CartDto> updateTask(@RequestBody CartDto cartDto) {
+    public ResponseEntity<CartDto> updateCart(@RequestBody CartDto cartDto) {
         Cart cart = cartMapper.mapToCart(cartDto);
         Cart savedCart = dbCartService.saveCart(cart);
         return ResponseEntity.ok(cartMapper.mapToCartDto(savedCart));

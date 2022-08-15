@@ -29,11 +29,4 @@ public class Cart {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
-    public Cart (Long id, List<Product> products) {
-        this.id = id;
-        this.products = products;
-
-    }
-
-
 }
