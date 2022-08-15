@@ -8,7 +8,6 @@ import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.DbUserKeyService;
 import com.kodilla.ecommercee.service.DbUserServices;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +23,6 @@ public class UserController {
     private UserMapper userMapper;
     private DbUserServices userServices;
     private DbUserKeyService userKeyService;
-
-    @GetMapping("/{id}")
-    public UserDto getUsers(@PathVariable Long id) throws UserNotFoundException {
-        return userMapper.mapToUserDto(userServices.getUserById(id));
-    }
 
     @PostMapping
     public ResponseEntity<Void> createUser(@RequestBody UserDto userDto){
