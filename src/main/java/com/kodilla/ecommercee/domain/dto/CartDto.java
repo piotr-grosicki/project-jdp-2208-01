@@ -10,7 +10,7 @@ import java.util.List;
 public class CartDto {
 
     private final Long id;
-    private final User userId;
+    private final Long userId;
     private final List<Long> products;
 
 }
