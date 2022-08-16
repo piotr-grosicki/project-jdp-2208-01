@@ -16,15 +16,4 @@ public class UserMapper {
                 .userKey(userDto.getUserKey())
                 .build();
     }
-
-    public UserDto mapToUserDto(final User user) {
-        return UserDto.builder()
-                .userId(user.getId())
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .status(user.getContent())
-                .userKey(user.getUserKey())
-                .cartId(user.getCart().getId())
-                .build();
-    }
 }

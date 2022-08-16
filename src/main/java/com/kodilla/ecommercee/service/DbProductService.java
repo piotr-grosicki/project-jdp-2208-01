@@ -3,14 +3,17 @@ package com.kodilla.ecommercee.service;
 import com.kodilla.ecommercee.exceptions.ProductNotFoundException;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.repository.ProductRepository;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DbProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public Product getProduct(final Long id) {
         return productRepository.findById(id).orElseThrow( () -> new ProductNotFoundException("Product of id: '" + id +

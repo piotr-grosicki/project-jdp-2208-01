@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.service;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.repository.OrderRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
